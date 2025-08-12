@@ -145,15 +145,12 @@ Authentification : Keycloak, FreeIPA
 Monitoring : Prometheus, Grafana
 
 🤝 6. Comment Contribuer
-Ce projet est actuellement en phase de conception. Pour contribuer :
+Ce projet est actuellement en phase de conception. Consultez la Feuille de Route et les Issues pour voir les tâches en cours, puis suivez le flux ci-dessous :
 
-Consultez la Feuille de Route et les Issues pour voir les tâches en cours.
-
-Clonez le dépôt : git clone ...
-
-Créez une nouvelle branche pour votre fonctionnalité : git checkout -b feature/nom-de-la-feature
-
-Faites vos modifications.
-
-Soumettez une Pull Request pour revue.
+1. Forkez le dépôt puis clonez votre fork.
+2. Créez une branche à partir de `main` nommée `type/description` (ex. `feat/partage-ressources`).
+3. Respectez les conventions de commit [Conventional Commits](https://www.conventionalcommits.org/fr/v1.0.0/) (ex. `feat: ajoute le partage P2P`).
+4. Exécutez les tests disponibles (par ex. `pytest` ou `npm test`) avant de pousser.
+5. Poussez votre branche et ouvrez une Pull Request.
+6. Référez-vous à [CONTRIBUTING.md](CONTRIBUTING.md) et [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) pour plus de détails dès qu'ils seront disponibles.
 
