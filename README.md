@@ -97,9 +97,13 @@ Le développement du projet est décomposé en étapes itératives.
 [ ] Tester une solution de stockage distribué (ex: GlusterFS, Ceph en mode démo).
 
 Étape 2 : Déploiement des Services de Base ⚙️
-[ ] Objectif : Intégrer les services unifiés et la sécurité.
+[ ] Objectif : Intégrer les services unifiés et la sécurité. Traefik (Ingress/SSL) et Redis (sessions persistantes) servent de fondation à l'infrastructure décentralisée.
 
 [ ] Tâches :
+
+[ ] Déployer Traefik pour la gestion des Ingress et du SSL.
+
+[ ] Déployer Redis pour assurer la persistance des sessions.
 
 [ ] Déployer BunkerWeb comme Ingress Controller pour sécuriser un service web de test.
 
