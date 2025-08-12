@@ -1,0 +1,17 @@
+version: "3.9"
+
+secrets:
+  redis_password:
+    file: ./secrets/redis_password.txt
+
+volumes:
+  redis-data:
+
+services:
+  redis:
+    image: redis:7
+    command: ["sh", "-c", "redis-server --appendonly yes --requirepass \"$$(cat /run/secrets/redis_password)\""]
+    volumes:
+      - redis-data:/data
+    secrets:
+      - redis_password
