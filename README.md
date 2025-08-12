@@ -33,8 +33,6 @@ Couche 4 : Sécurité en Périphérie 🛡️
 
 🛠️ Technologies Envisagées
 
-💾 Redis pour la persistance des sessions
-
 🤝 Comment Contribuer
 
 ✨ 1. Vision du Projet
@@ -146,45 +144,7 @@ Authentification : Keycloak, FreeIPA
 
 Monitoring : Prometheus, Grafana
 
-💾 6. Redis pour la persistance des sessions
-Pour la persistance centralisée des sessions, Redis est déployé avec la configuration suivante :
-
-- Volume nommé `redis-data` pour stocker les données.
-- Service `redis` basé sur l'image `redis:7` lancé avec l'option `--appendonly yes`.
-- Mot de passe géré via un secret Docker.
-- Les services consommateurs doivent exposer les variables d'environnement `REDIS_HOST` et `REDIS_PASSWORD`.
-
-Exemple de fichier `stack/redis.yml` :
-
-```yaml
-version: "3.9"
-
-secrets:
-  redis_password:
-    file: ./secrets/redis_password.txt
-
-volumes:
-  redis-data:
-
-services:
-  redis:
-    image: redis:7
-    command: ["sh", "-c", "redis-server --appendonly yes --requirepass \"$$(cat /run/secrets/redis_password)\""]
-    volumes:
-      - redis-data:/data
-    secrets:
-      - redis_password
-```
-
-Les services utilisant Redis définissent :
-
-```yaml
-environment:
-  REDIS_HOST: redis
-  REDIS_PASSWORD: <mot de passe>
-```
-
-🤝 7. Comment Contribuer
+🤝 6. Comment Contribuer
 Ce projet est actuellement en phase de conception. Pour contribuer :
 
 Consultez la Feuille de Route et les Issues pour voir les tâches en cours.
