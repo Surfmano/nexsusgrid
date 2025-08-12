@@ -1,0 +1,9 @@
+services:
+  hello-grid:
+    build: ./apps/hello-grid
+    image: hello-grid:dev
+    ports:
+      - "8080:8000"
+    environment:
+      PYTHONUNBUFFERED: "1"
+      # (Bonus futur) REDIS_HOST and REDIS_PASSWORD if needed

@@ -52,3 +52,31 @@ make stack/up STACK=redis
 ```
 
 Licence: MIT — voir [LICENSE](LICENSE).
+
+## Tester hello‑grid en local
+
+Build et lance le service hello‑grid en local (Docker Compose) :
+
+```bash
+# Build et démarrer en arrière-plan
+make dev/up
+
+# Arrêter et supprimer les ressources (volumes inclus)
+make dev/down
+```
+
+Vérifier rapidement via curl :
+
+```bash
+# Root endpoint
+curl -sS http://localhost:8080/
+
+# Metrics
+curl -sS http://localhost:8080/metrics
+```
+
+Détails importants :
+- L'image est construite depuis `apps/hello-grid` et taggée `hello-grid:dev`.
+- Le service écoute sur le port 8000 dans le conteneur et est mappé sur le port 8080 de la machine hôte.
+- Le container est exécuté en tant qu'utilisateur non‑root et expose un `HEALTHCHECK` sur `/`.
+- Tests unitaires disponibles dans `apps/hello-grid/tests/` (exécuter `pytest apps/hello-grid/tests`).
