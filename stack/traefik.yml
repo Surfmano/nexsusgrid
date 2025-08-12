@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  traefik:
+    image: traefik:v2.11
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - proxy
+    volumes:
+      - ./traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ./acme.json:/acme.json
+    deploy:
+      labels:
+        - "traefik.http.routers.traefik.rule=Host(`traefik.local`)"
+        - "traefik.http.routers.traefik.service=api@internal"
+        - "traefik.http.services.traefik.loadbalancer.sticky.cookie=true"
+
+networks:
+  proxy:
+    external: true

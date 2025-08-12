@@ -144,6 +144,43 @@ Authentification : Keycloak, FreeIPA
 
 Monitoring : Prometheus, Grafana
 
+🌐 Traefik Ingress & Load Balancer
+
+Création du réseau overlay `proxy` :
+
+```bash
+docker network create --driver=overlay proxy
+```
+
+Service Traefik utilisant ce réseau et montant les fichiers `traefik.yaml` et `acme.json` :
+
+```yaml
+# stack/traefik.yml
+version: "3.8"
+services:
+  traefik:
+    image: traefik:v2.11
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - proxy
+    volumes:
+      - ./traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - ./acme.json:/acme.json
+    deploy:
+      labels:
+        - "traefik.http.routers.traefik.rule=Host(`traefik.local`)"
+        - "traefik.http.routers.traefik.service=api@internal"
+        - "traefik.http.services.traefik.loadbalancer.sticky.cookie=true"
+
+networks:
+  proxy:
+    external: true
+```
+
+Les labels `traefik.http.routers.*` exposent le dashboard et `traefik.http.services.*.sticky.cookie` active les sticky sessions pour conserver les utilisateurs sur le même nœud.
+
 🤝 6. Comment Contribuer
 Ce projet est actuellement en phase de conception. Pour contribuer :
 
