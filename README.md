@@ -1,199 +1,54 @@
-<div align="center">
-<h1>🚀 Projet NexusGrid 🚀</h1>
-<p>
-<strong>Version 0.1.0</strong><br />
-<em>Un Cloud Privé d'Infrastructure Unifiée et Décentralisée</em>
-</p>
-</div>
-
-🗺️ Table des Matières
-✨ Vision du Projet
-
-🎯 Objectifs Clés
-
-🏗️ Architecture Conceptuelle
-
-Couche 1 : Le Grid de Ressources P2P 🔗
-
-Couche 2 : Orchestration par Conteneurs 📦
-
-Couche 3 : Services Unifiés 🧩
-
-Couche 4 : Sécurité en Périphérie 🛡️
-
-🗺️ Feuille de Route (Roadmap)
-
-Étape 1 : Preuve de Concept (PoC) - Le Noyau du Grid 🔬
-
-Étape 2 : Déploiement des Services de Base ⚙️
-
-Étape 3 : Intégration Avancée et Optimisation 🧠
-
-Étape 4 : Production et Déploiement à l'Échelle 🌐
-
-🛠️ Technologies Envisagées
-
-💾 Redis pour la persistance des sessions
-
-🤝 Comment Contribuer
-
-✨ 1. Vision du Projet
-NexusGrid a pour ambition de transformer l'infrastructure informatique traditionnelle d'une entreprise en un super-ordinateur décentralisé. En agrégeant les ressources de toutes les machines (serveurs, postes de travail), nous créons un cloud privé unifié, résilient et intelligent.
-
-L'objectif final est de maximiser l'utilisation des actifs existants, d'assurer une haute disponibilité des services, de fournir des capacités d'IA locales et de minimiser l'empreinte énergétique du parc informatique.
-
-🎯 2. Objectifs Clés
-⚡ Optimisation des Ressources : Mettre fin au gaspillage de puissance de calcul, de mémoire et de stockage des machines sous-utilisées.
-
-💪 Haute Disponibilité : Garantir que la défaillance d'un ou plusieurs nœuds n'interrompt pas les services critiques, grâce à un système de redondance distribuée.
-
-🔐 Souveraineté des Données : Héberger tous les services, y compris l'IA (LLM), en interne pour un contrôle total et une confidentialité maximale.
-
-🌱 Efficacité Énergétique : Mettre en place une gestion intelligente de l'alimentation pour réduire la consommation électrique globale.
-
-🏰 Sécurité Centralisée : Fournir un point d'entrée unique et fortifié pour toutes les applications hébergées.
-
-🏗️ 3. Architecture Conceptuelle
-L'architecture de NexusGrid est décomposée en quatre couches logiques interdépendantes.
-
-Couche 1 : Le Grid de Ressources P2P 🔗
-C'est la fondation du système. Chaque machine du réseau exécute un agent léger qui la transforme en un nœud du Grid.
-
-Partage CPU/RAM : Les ressources de calcul et de mémoire sont mutualisées.
-
-Stockage Distribué ("RAID P2P") : Les données ne sont pas stockées sur un disque unique, mais fragmentées, chiffrées et répliquées sur plusieurs nœuds du Grid. Cela garantit la persistance et la disponibilité des données même si des nœuds se déconnectent.
-
-Couche 2 : Orchestration par Conteneurs 📦
-Les applications sont déployées sous forme de conteneurs légers pour une portabilité maximale.
-
-Conteneurisation : Docker est utilisé pour encapsuler chaque service et ses dépendances.
-
-Orchestration : Un orchestrateur (type Kubernetes) gère le cycle de vie des conteneurs. Il est responsable de leur déploiement, de leur mise à l'échelle et de leur redémarrage automatique sur les nœuds les plus appropriés du Grid.
-
-Couche 3 : Services Unifiés 🧩
-Le Grid héberge des services fondamentaux pour l'entreprise, eux-mêmes conteneurisés et hautement disponibles.
-
-IA Locale : Un service basé sur Ollama permet de déployer et d'interroger des modèles de langage (LLM) en local.
-
-Authentification Centralisée : Un service d'annuaire (type Keycloak) gère les identités, les accès et le Single Sign-On (SSO) pour toutes les applications du Grid.
-
-Couche 4 : Sécurité en Périphérie 🛡️
-Tout le trafic entrant destiné aux applications est filtré par un reverse proxy de sécurité.
-
-WAF (Web Application Firewall) : Un conteneur BunkerWeb agit comme Ingress Controller. Il inspecte le trafic, bloque les menaces (OWASP Top 10, bots malveillants) et assure une configuration TLS/SSL robuste avant de transmettre les requêtes légitimes aux services.
-
-🗺️ 4. Feuille de Route (Roadmap)
-Le développement du projet est décomposé en étapes itératives.
-
-Étape 1 : Preuve de Concept (PoC) - Le Noyau du Grid 🔬
-[ ] Objectif : Valider le partage de ressources sur un petit nombre de machines (2-3).
-
-[ ] Tâches :
-
-[ ] Mettre en place un agent de partage de ressources basique.
-
-[ ] Configurer un cluster Docker Swarm ou K3s/MicroK8s sur ces machines.
-
-[ ] Déployer un conteneur simple et vérifier qu'il peut s'exécuter sur n'importe quel nœud.
-
-[ ] Tester une solution de stockage distribué (ex: GlusterFS, Ceph en mode démo).
-
-Étape 2 : Déploiement des Services de Base ⚙️
-[ ] Objectif : Intégrer les services unifiés et la sécurité.
-
-[ ] Tâches :
-
-[ ] Déployer BunkerWeb comme Ingress Controller pour sécuriser un service web de test.
-
-[ ] Déployer un service d'authentification (Keycloak) sur le cluster.
-
-[ ] Déployer un LLM via Ollama dans un conteneur et l'exposer de manière sécurisée via BunkerWeb.
-
-Étape 3 : Intégration Avancée et Optimisation 🧠
-[ ] Objectif : Rendre le Grid intelligent et économe en énergie.
-
-[ ] Tâches :
-
-[ ] Développer un script de monitoring qui collecte l'utilisation des ressources et la consommation électrique des nœuds.
-
-[ ] Intégrer ces métriques dans la logique de planification de l'orchestrateur.
-
-[ ] Mettre en place un mécanisme de mise en veille (Wake-on-LAN) piloté par l'orchestrateur.
-
-Étape 4 : Production et Déploiement à l'Échelle 🌐
-[ ] Objectif : Préparer le déploiement sur l'ensemble du parc.
-
-[ ] Tâches :
-
-[ ] Créer des scripts d'installation automatisés pour l'agent NexusGrid.
-
-[ ] Rédiger la documentation complète pour les administrateurs et les utilisateurs.
-
-[ ] Planifier la migration progressive des applications existantes vers NexusGrid.
-
-🛠️ 5. Technologies Envisagées
-Conteneurisation : Docker
-
-Orchestration : Kubernetes (K8s, K3s) ou Docker Swarm
-
-Sécurité Web (WAF) : BunkerWeb
-
-Stockage Distribué : Ceph, GlusterFS, IPFS
-
-IA Locale : Ollama
-
-Authentification : Keycloak, FreeIPA
-
-Monitoring : Prometheus, Grafana
-
-💾 6. Redis pour la persistance des sessions
-Pour la persistance centralisée des sessions, Redis est déployé avec la configuration suivante :
-
-- Volume nommé `redis-data` pour stocker les données.
-- Service `redis` basé sur l'image `redis:7` lancé avec l'option `--appendonly yes`.
-- Mot de passe géré via un secret Docker.
-- Les services consommateurs doivent exposer les variables d'environnement `REDIS_HOST` et `REDIS_PASSWORD`.
-
-Exemple de fichier `stack/redis.yml` :
-
-```yaml
-version: "3.9"
-
-secrets:
-  redis_password:
-    file: ./secrets/redis_password.txt
-
-volumes:
-  redis-data:
-
-services:
-  redis:
-    image: redis:7
-    command: ["sh", "-c", "redis-server --appendonly yes --requirepass \"$$(cat /run/secrets/redis_password)\""]
-    volumes:
-      - redis-data:/data
-    secrets:
-      - redis_password
+# NexusGrid
+
+NexusGrid vise à transformer l’infrastructure d’entreprise en **cloud privé unifié et décentralisé**, en agrégeant les ressources CPU/RAM/stockage des machines pour offrir **résilience**, **sécurité** et **souveraineté** (IA locale incluse).
+
+## Structure du dépôt
+
+```
+.
+├─ apps/
+│  └─ hello-grid/            # sera rempli à l’étape 2
+├─ agents/
+│  └─ nexus-agent/           # placeholder pour plus tard
+├─ infra/
+│  └─ k3d/                   # fichiers de cluster local (étape 3)
+├─ k8s/
+│  └─ hello-grid/            # manifests k8s (étape 3)
+├─ stack/                    # stacks Docker Compose/Swarm (ex: redis)
+├─ docs/
+├─ secrets/                  # ignoré git
+├─ Makefile
+├─ .gitignore
+├─ .editorconfig
+├─ LICENSE (MIT)
+├─ README.md
+└─ CONTRIBUTING.md
 ```
 
-Les services utilisant Redis définissent :
+## Documentation
 
-```yaml
-environment:
-  REDIS_HOST: redis
-  REDIS_PASSWORD: <mot de passe>
+- Vision: [docs/vision.md](docs/vision.md)
+- Objectifs: [docs/objectifs.md](docs/objectifs.md)
+- Architecture (4 couches): [docs/architecture.md](docs/architecture.md)
+- Roadmap (Étapes 1 → 4): [docs/roadmap.md](docs/roadmap.md)
+- Technologies: [docs/technologies.md](docs/technologies.md)
+- Redis (stack + secrets): [docs/redis.md](docs/redis.md)
+
+## Roadmap de démarrage
+
+- Étape 1 — PoC du noyau du Grid (Swarm/K3s basique, hello-grid)
+- Étape 2 — Services de base (BunkerWeb, Keycloak, LLM via Ollama)
+- Étape 3 — Intégration avancée & optimisation (monitoring, planification, WoL)
+
+## Démarrage rapide (Docker Swarm)
+
+```bash
+make help
+# Initialiser Swarm + réseau
+make swarm/init
+make net/create
+# Créer le secret (voir docs/redis.md), puis déployer Redis:
+make stack/up STACK=redis
 ```
 
-🤝 7. Comment Contribuer
-Ce projet est actuellement en phase de conception. Pour contribuer :
-
-Consultez la Feuille de Route et les Issues pour voir les tâches en cours.
-
-Clonez le dépôt : git clone ...
-
-Créez une nouvelle branche pour votre fonctionnalité : git checkout -b feature/nom-de-la-feature
-
-Faites vos modifications.
-
-Soumettez une Pull Request pour revue.
-
+Licence: MIT — voir [LICENSE](LICENSE).

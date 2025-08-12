@@ -1,0 +1,53 @@
+# General
+.DS_Store
+*.log
+*.tmp
+*.swp
+*.swo
+*.pid
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnpm-store/
+dist/
+build/
+.cache/
+.next/
+coverage/
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.tox/
+
+# Docker
+*.tar
+docker-compose.override.yml
+.docker/
+.dockerignore
+
+# Secrets
+secrets/
+*.env
+.env
+.env.*
+!.env.example
+# Optional: ignore a local plaintext secret if created by user
+secrets/redis_password.txt
+
+# OS
+Thumbs.db
