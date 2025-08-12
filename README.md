@@ -33,6 +33,8 @@ Couche 4 : Sécurité en Périphérie 🛡️
 
 🛠️ Technologies Envisagées
 
+🚀 Démarrer le projet pas à pas
+
 🤝 Comment Contribuer
 
 ✨ 1. Vision du Projet
@@ -144,7 +146,13 @@ Authentification : Keycloak, FreeIPA
 
 Monitoring : Prometheus, Grafana
 
-🤝 6. Comment Contribuer
+🚀 6. Démarrer le projet pas à pas
+1. **Déploiement d'un agent léger sur 2-3 machines** : installez un agent minimal sur chaque hôte afin qu'il rejoigne le Grid et remonte ses ressources.
+2. **Création d'un cluster Docker Swarm/K3s** : initialisez un gestionnaire, joignez les nœuds restants puis vérifiez que l'orchestrateur voit l'ensemble des machines.
+3. **Déploiement d'un conteneur de test et vérification du scheduling multi-nœuds** : lancez un simple service (ex. Nginx) et assurez-vous qu'il peut s'exécuter sur plusieurs nœuds via l'orchestrateur.
+4. **Mise en place d'un stockage distribué (GlusterFS/Ceph) pour la persistance des données** : configurez un volume partagé répliqué entre les nœuds et montez-le dans le conteneur de test pour valider la persistance.
+
+🤝 7. Comment Contribuer
 Ce projet est actuellement en phase de conception. Pour contribuer :
 
 Consultez la Feuille de Route et les Issues pour voir les tâches en cours.
