@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  hello-grid:
+    image: hello-grid:dev
+    build:
+      context: ./apps/hello-grid
+    networks:
+      - grid
+    ports:
+      - target: 8000
+        published: 8080
+        protocol: tcp
+        mode: ingress
+    deploy:
+      mode: replicated
+      replicas: 3
+      update_config:
+        parallelism: 1
+        order: start-first
+      restart_policy:
+        condition: on-failure
+    environment:
+      PYTHONUNBUFFERED: "1"
+
+networks:
+  grid:
+    external: true

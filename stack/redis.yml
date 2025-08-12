@@ -1,17 +1,49 @@
 version: "3.9"
 
-secrets:
-  redis_password:
-    file: ./secrets/redis_password.txt
-
-volumes:
-  redis-data:
-
 services:
   redis:
     image: redis:7
-    command: ["sh", "-c", "redis-server --appendonly yes --requirepass \"$$(cat /run/secrets/redis_password)\""]
+    command:
+      - sh
+      - -c
+      - >
+        redis-server --appendonly yes
+        --protected-mode yes
+        --requirepass "$$(cat /run/secrets/redis_password)"
     volumes:
       - redis-data:/data
     secrets:
       - redis_password
+    networks:
+      - grid
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 10
+        window: 30s
+      update_config:
+        parallelism: 1
+        order: start-first
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a \"$$(cat /run/secrets/redis_password)\" ping | grep PONG || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  redis-data:
+
+secrets:
+  redis_password:
+    external: true
+
+networks:
+  grid:
+    external: true

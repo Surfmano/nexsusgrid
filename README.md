@@ -42,14 +42,61 @@ NexusGrid vise à transformer l’infrastructure d’entreprise en **cloud priv�
 
 ## Démarrage rapide (Docker Swarm)
 
+Sur le nœud manager :
+
 ```bash
+# Afficher l'aide
 make help
-# Initialiser Swarm + réseau
+
+# Initialiser Swarm (idempotent)
 make swarm/init
-make net/create
-# Créer le secret (voir docs/redis.md), puis déployer Redis:
-make stack/up STACK=redis
+
+# (Optionnel) obtenir les tokens de jointure
+make swarm/token/worker    # affiche le token pour joindre des workers
+make swarm/token/manager   # affiche le token pour joindre d'autres managers
 ```
+
+Sur chaque nœud supplémentaire (exécuté sur le nœud à joindre) : remplacer <MANAGER_IP> et <TOKEN> par les valeurs obtenues depuis le manager :
+
+```bash
+# Exemple (sur le nœud à joindre)
+docker swarm join --token <TOKEN> <MANAGER_IP>:2377
+```
+
+Créer les réseaux overlay attachables (une seule fois depuis le manager) :
+
+```bash
+make net/create
+```
+
+Déployer une stack (ex : redis) depuis le répertoire `stack` :
+
+```bash
+make stack/up STACK=redis
+# ou pour une autre stack
+make stack/up STACK=hello-grid
+```
+
+Pour supprimer une stack :
+
+```bash
+make stack/down STACK=redis
+```
+
+Vérifier que les réseaux `grid` et `edge` existent et sont de type `overlay` avec `Attachable: true` :
+
+```bash
+# Liste rapide
+docker network ls | grep -E 'grid|edge'
+
+# Vérification détaillée (doit contenir "Driver": "overlay" et "Attachable": true)
+docker network inspect grid
+docker network inspect edge
+```
+
+Critères rapides :
+- Les cibles Make (swarm/init, swarm/token/*, net/create, stack/up, stack/down, swarm/leave) permettent d'automatiser les opérations décrites.
+- Les réseaux `grid` et `edge` doivent apparaître dans `docker network ls` et `docker network inspect` doit indiquer `Driver: overlay` et `Attachable: true`.
 
 Licence: MIT — voir [LICENSE](LICENSE).
 
